@@ -31,6 +31,9 @@ def put_black_schole(S, K, r, T, sigma):
     put = N(-d2) * K * np.exp(-r*T) - N(-d1) * S
     return put
 
+"""
+this is for test bracnch only
+"""
 
 st.title("Black-Scholes Pricing Model")
 
