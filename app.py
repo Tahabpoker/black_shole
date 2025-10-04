@@ -124,8 +124,8 @@ with heatmap_col1:
     
     sns.heatmap(
         puts_heatmap, 
-        xticklabels=np.round(K_range[::2], 1),
-        yticklabels=np.round(sigma_range[::2], 2), 
+        xticklabels=[f'{k:.1f}' for k in K_range],
+        yticklabels=[f'{s:.2f}' for s in sigma_range], 
         cmap="RdYlGn", 
         annot=True, 
         fmt=".2f", 
@@ -147,8 +147,8 @@ with heatmap_col2:
     
     sns.heatmap(
         calls_heatmap, 
-        xticklabels=np.round(K_range[::2], 1),
-        yticklabels=np.round(sigma_range[::2], 2), 
+        xticklabels=[f'{k:.1f}' for k in K_range],
+        yticklabels=[f'{s:.2f}' for s in sigma_range], 
         cmap="RdYlGn", 
         annot=True, 
         fmt=".2f", 
