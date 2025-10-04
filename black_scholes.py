@@ -32,14 +32,14 @@ def put_black_schole(S, K, r, T, sigma):
     put = N(-d2) * K * np.exp(-r*T) - N(-d1) * S
     return put
 
-K = np.arange(90,100,1)
-r = 0.05
+K1 = np.arange(90,100,1)
+r1 = 0.05
 # T = np.arange(0,1,0.01)
-T = 1
-sigma = np.arange(0.1,1,0.1)
-S = 99
+T1 = 1
+sigma1 = np.arange(0.1,1,0.1)
+S1 = 99
 
-K_i,sigma_i = np.meshgrid(K,sigma)
+K_i,sigma_i = np.meshgrid(K1,sigma1)
 
 calls = call_black_schole(S,K_i,r,T,sigma_i)
 puts = put_black_schole(S,K_i,r,T,sigma_i)
