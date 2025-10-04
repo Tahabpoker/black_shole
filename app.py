@@ -1,4 +1,38 @@
 import streamlit as st
+import numpy as np 
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+
+
+
+N = norm.cdf
+
+def call_black_schole(S, K, r, T, sigma):
+    """
+    S: strike price
+    K: current price 
+    r: risk free rate of intrest
+    T: time until expiration 
+    sigma: annual volatility  of assets return
+    """
+    d1 = (np.log(S/K)+(r + sigma ** 2 / 2)*T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma*np.sqrt(T)
+    call = S * N(d1) - K * np.exp(-r*T) * N(d2)
+    return call 
+
+def put_black_schole(S, K, r, T, sigma):
+    """
+    S: strike price
+    K: current price 
+    r: risk free rate of intrest
+    T: time until expiration 
+    sigma: annual volatility  of assets return
+    """
+    d1 = (np.log(S/K)+(r + sigma ** 2 / 2)*T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma*np.sqrt(T)
+    put = N(-d2) * K * np.exp(-r*T) - N(-d1) * S
+    return put
+
 
 st.title("Black-Scholes Pricing Model")
 st.table({
@@ -8,6 +42,17 @@ st.table({
     "Volatility": [0.20],
     "Risk-Free Interest Rate": [0.05]
 })
+
+K = 100
+S = 70
+T = 1
+sigma = 0.20
+r = 0.05
+# T = np.arange(0,1,0.01)
+
+calls = call_black_schole(S,K,r,T,sigma)
+puts = put_black_schole(S,K,r,T,sigma)
+
 
 st.markdown(
     """
@@ -35,10 +80,10 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown(
-        """
+        f"""
         <div class="box call-box">
             <div >CALL Value</div>
-            <div >$10.47</div>
+            <div >${calls:.2f}</div>
         </div>
         """,
         unsafe_allow_html=True
@@ -46,11 +91,14 @@ with col1:
 
 with col2:
     st.markdown(
-        """
+        f"""
         <div class="box put-box">
             <div >PUT Value</div>
-            <div >$5.55</div>
+            <div >${puts:.2f}</div>
         </div>
         """,
         unsafe_allow_html=True
     )
+
+
+
