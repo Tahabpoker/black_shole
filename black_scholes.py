@@ -55,7 +55,7 @@ print(f" calls: {calls} \n puts: {puts}")
 
 # --- Seaborn Heatmap ---
 
-fig , (ax1, ax2) = plt.subplots(1,2,figsize=(8, 6))
+fig , (ax1, ax2) = plt.subplots(1,2,figsize = (15,10))
 
 
 
@@ -87,7 +87,7 @@ sns.heatmap(
 ax2.set_title("Black–Scholes Call Option Heatmap")
 ax2.set_xlabel("Strike Price (K)")
 ax2.set_ylabel("Volatility (σ)")
-plt.tight_layout()
+
 plt.show()
 
 
