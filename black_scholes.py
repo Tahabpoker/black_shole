@@ -50,10 +50,15 @@ puts = put_black_schole(S,K_i,r,T,sigma_i)
 # plt.show()
 
 
+
 print(f" calls: {calls} \n puts: {puts}")
 
 # --- Seaborn Heatmap ---
-plt.figure(figsize=(8, 6))
+
+fig , (ax1, ax2) = plt.subplots(1,2,figsize=(8, 6))
+
+
+
 sns.heatmap(
     puts, 
     # xticklabels=K, 
@@ -61,11 +66,28 @@ sns.heatmap(
     cmap="viridis", 
     annot=True, 
     fmt=".2f", 
-    cbar_kws={'label': 'Put Option Price'}
+    cbar_kws={'label': 'Put Option Price'},
+    ax=ax1
 )
 
-plt.title("Black–Scholes Put Option Heatmap (Seaborn)")
-plt.xlabel("Strike Price (K)")
-plt.ylabel("Volatility (σ)")
+ax1.set_title("Black–Scholes Put Option Heatmap")
+ax1.set_xlabel("Strike Price (K)")
+ax1.set_ylabel("Volatility (σ)")
+
+sns.heatmap(
+    puts, 
+    # xticklabels=K, 
+    # yticklabels=np.round(sigma, 2), 
+    cmap="viridis", 
+    annot=True, 
+    fmt=".2f", 
+    cbar_kws={'label': 'Put Option Price'},
+    ax=ax2
+)
+ax2.set_title("Black–Scholes Call Option Heatmap")
+ax2.set_xlabel("Strike Price (K)")
+ax2.set_ylabel("Volatility (σ)")
 plt.tight_layout()
 plt.show()
+
+
